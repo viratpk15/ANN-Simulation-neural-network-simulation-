@@ -1,0 +1,121 @@
+{
+  "format": "neurosim-lab/project",
+  "version": 1,
+  "payload": {
+    "name": "Iris Classifier 4-16-8-3",
+    "network": {
+      "name": "Iris Classifier 4-16-8-3",
+      "layers": [
+        {
+          "id": "input",
+          "kind": "input",
+          "params": {
+            "features": 4,
+            "neurons": null,
+            "activation": "relu",
+            "use_bias": true,
+            "init": "xavier",
+            "dropout_rate": 0.5
+          },
+          "position": {
+            "x": 0.0,
+            "y": 140.0
+          },
+          "label": null
+        },
+        {
+          "id": "hidden1",
+          "kind": "dense",
+          "params": {
+            "features": null,
+            "neurons": 16,
+            "activation": "relu",
+            "use_bias": true,
+            "init": "he",
+            "dropout_rate": 0.5
+          },
+          "position": {
+            "x": 220.0,
+            "y": 60.0
+          },
+          "label": null
+        },
+        {
+          "id": "hidden2",
+          "kind": "dense",
+          "params": {
+            "features": null,
+            "neurons": 8,
+            "activation": "relu",
+            "use_bias": true,
+            "init": "he",
+            "dropout_rate": 0.5
+          },
+          "position": {
+            "x": 440.0,
+            "y": 220.0
+          },
+          "label": null
+        },
+        {
+          "id": "output",
+          "kind": "output",
+          "params": {
+            "features": null,
+            "neurons": 3,
+            "activation": "softmax",
+            "use_bias": true,
+            "init": "xavier",
+            "dropout_rate": 0.5
+          },
+          "position": {
+            "x": 660.0,
+            "y": 140.0
+          },
+          "label": null
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-input-hidden1",
+          "source": "input",
+          "target": "hidden1"
+        },
+        {
+          "id": "e-hidden1-hidden2",
+          "source": "hidden1",
+          "target": "hidden2"
+        },
+        {
+          "id": "e-hidden2-output",
+          "source": "hidden2",
+          "target": "output"
+        }
+      ],
+      "custom_activations": {}
+    },
+    "dataset": {
+      "kind": "builtin",
+      "name": "iris",
+      "preprocessing": {
+        "scale": "standard",
+        "test_split": 0.2,
+        "val_split": 0.2,
+        "seed": 7
+      }
+    },
+    "training_config": {
+      "l2": 0.0,
+      "shuffle": true,
+      "epochs": 200,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "optimizer": "adam",
+      "loss": "cross_entropy",
+      "seed": 7,
+      "snapshot_every": 10
+    },
+    "run_id": null,
+    "custom_activations": {}
+  }
+}

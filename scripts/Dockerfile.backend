@@ -1,0 +1,46 @@
+# Pinned to the latest 3.12 patch, on the trixie (Debian 13) slim variant.
+#
+# The distro suffix is load-bearing for the Docker DX scanner, which reads the
+# base image's SBOM at this FROM line *statically* — it never runs the build, so
+# no later RUN layer (an `apt-get upgrade`, say) can change its verdict. The only
+# thing that moves the number is a cleaner base.
+#
+# bookworm (Debian 12) is the previous stable and is what this file used to pin.
+# Its userland (libssl, libsystemd, perl, curl, zlib, ...) had 3 critical + 12
+# high advisories open against it, and Debian does not move the image tag when it
+# backports fixes, so a fresh `3.12.14-slim-bookworm` pull reports them too.
+# trixie is current stable: same Python 3.12.14 interpreter and the same
+# requirements.txt / torch wheels as before, on a base that no longer carries
+# those advisories.
+#
+# Bump the 3.12.x patch when a newer one ships. To move to the next Debian
+# release, change trixie -> <newer> only after confirming the pinned torch build
+# has wheels for it.
+FROM python:3.12.14-slim-trixie
+WORKDIR /app
+
+# Defense in depth, not the fix for the scanner warning: the trixie base is what
+# actually clears the critical/high findings (see the FROM comment above). This
+# layer still patches the userland at build time, so the image picks up Debian
+# security updates published after the base tag was cut. It sits before the pip
+# installs so the (slow) torch download stays cached when only Debian patches
+# change, and the lists are removed in the same layer so the ~40MB of apt metadata
+# never reaches the final image.
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --no-install-recommends \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# CPU-only torch keeps the image small; install first for cache reuse
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+COPY backend/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend ./backend
+# Note: the built SPA is deliberately NOT copied here. `frontend/dist` is a
+# gitignored build artifact absent from a fresh clone, so COPY would fail the
+# image build. main.py mounts it only if present (`if _DIST.exists()`), and in
+# compose the SPA is served by the frontend nginx container instead.
+WORKDIR /app/backend
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

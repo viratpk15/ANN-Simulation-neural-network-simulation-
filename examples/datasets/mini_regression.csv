@@ -1,0 +1,17 @@
+size_m2,rooms,city,price_k
+45,2,Lisbon,150
+62,2,Porto,180
+78,3,Lisbon,240
+90,3,Porto,265
+120,4,Lisbon,340
+55,2,Faro,160
+70,3,Faro,210
+85,3,Lisbon,255
+95,4,Porto,290
+110,4,Lisbon,320
+48,1,Faro,140
+66,2,Lisbon,195
+80,3,Porto,230
+100,3,Faro,250
+130,4,Lisbon,360
+58,2,Porto,170

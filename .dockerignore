@@ -1,0 +1,37 @@
+# Docker build context. The compose file builds from the repo root, so without
+# this the 120M+ frontend/node_modules is uploaded to the daemon on every build.
+# frontend/dist is excluded so the container always compiles its own SPA
+# instead of inheriting a possibly stale host build.
+
+# version control / CI
+.git
+.github
+.gitignore
+
+# python
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.ruff_cache
+**/.mypy_cache
+**/.venv
+venv/
+
+# node / frontend
+**/node_modules
+frontend/dist
+**/npm-debug.log*
+
+# runtime data & secrets — never bake these into an image
+data
+**/.env
+**/.env.local
+*.db
+*.pt
+
+# build output & editor cruft
+*.zip
+**/.DS_Store
+**/.idea
+**/.vscode
+docs

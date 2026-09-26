@@ -1,0 +1,36 @@
+# dependencies / builds
+node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+*.tsbuildinfo
+
+# runtime data (SQLite DB, uploads, trained weights)
+data/*.db
+data/uploads/
+data/runs/
+
+# environment / secrets
+.env
+.env.*
+.env.example
+env
+env.*
+*.env
+*.local
+*.pem
+*.key
+*.cert
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/settings.json
+
+# packaging
+*.zip

@@ -1,0 +1,121 @@
+{
+  "format": "neurosim-lab/project",
+  "version": 1,
+  "payload": {
+    "name": "XOR Demo Network",
+    "network": {
+      "name": "XOR Demo Network",
+      "layers": [
+        {
+          "id": "input",
+          "kind": "input",
+          "params": {
+            "features": 2,
+            "neurons": null,
+            "activation": "relu",
+            "use_bias": true,
+            "init": "xavier",
+            "dropout_rate": 0.5
+          },
+          "position": {
+            "x": 0.0,
+            "y": 140.0
+          },
+          "label": null
+        },
+        {
+          "id": "hidden1",
+          "kind": "dense",
+          "params": {
+            "features": null,
+            "neurons": 8,
+            "activation": "tanh",
+            "use_bias": true,
+            "init": "xavier",
+            "dropout_rate": 0.5
+          },
+          "position": {
+            "x": 220.0,
+            "y": 60.0
+          },
+          "label": null
+        },
+        {
+          "id": "hidden2",
+          "kind": "dense",
+          "params": {
+            "features": null,
+            "neurons": 8,
+            "activation": "tanh",
+            "use_bias": true,
+            "init": "xavier",
+            "dropout_rate": 0.5
+          },
+          "position": {
+            "x": 440.0,
+            "y": 220.0
+          },
+          "label": null
+        },
+        {
+          "id": "output",
+          "kind": "output",
+          "params": {
+            "features": null,
+            "neurons": 2,
+            "activation": "softmax",
+            "use_bias": true,
+            "init": "xavier",
+            "dropout_rate": 0.5
+          },
+          "position": {
+            "x": 660.0,
+            "y": 140.0
+          },
+          "label": null
+        }
+      ],
+      "edges": [
+        {
+          "id": "e-input-hidden1",
+          "source": "input",
+          "target": "hidden1"
+        },
+        {
+          "id": "e-hidden1-hidden2",
+          "source": "hidden1",
+          "target": "hidden2"
+        },
+        {
+          "id": "e-hidden2-output",
+          "source": "hidden2",
+          "target": "output"
+        }
+      ],
+      "custom_activations": {}
+    },
+    "dataset": {
+      "kind": "builtin",
+      "name": "xor",
+      "preprocessing": {
+        "scale": "none",
+        "test_split": 0.2,
+        "val_split": 0.2,
+        "seed": 42
+      }
+    },
+    "training_config": {
+      "l2": 0.0,
+      "shuffle": true,
+      "epochs": 300,
+      "batch_size": 16,
+      "learning_rate": 0.05,
+      "optimizer": "adam",
+      "loss": "cross_entropy",
+      "seed": 42,
+      "snapshot_every": 15
+    },
+    "run_id": null,
+    "custom_activations": {}
+  }
+}

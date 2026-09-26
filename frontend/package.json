@@ -1,0 +1,34 @@
+{
+  "name": "neurosim-lab-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "NeuroSim Lab — Interactive Neural Network Simulation, Visualization & AI Diagnosis Platform",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "katex": "^0.16.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "reactflow": "^11.11.4",
+    "recharts": "^2.13.3",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.7",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "~5.6.3",
+    "vite": "^6.4.3",
+    "vitest": "^4.1.11"
+  }
+}

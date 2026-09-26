@@ -1,0 +1,25 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+# 120 matches the width the editor's Ruff extension reports against.
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+# E (pycodestyle) + F (pyflakes) are the rule families the editor surfaces.
+# B904 is enabled on its own (not the rest of flake8-bugbear) because the
+# `raise ... from` chain is a genuine debuggability issue at the API boundary:
+# without it a real internal error is reported to the client as a generic 404
+# and the underlying traceback never reaches the logs.
+# I/UP/B are deliberately not enabled: adopting them repo-wide would be a
+# large unrelated refactor. The rest of B is also left off to keep this
+# targeted; RUF001/002/003 in particular must stay off so the intentional
+# Unicode math symbols (×, γ, −) are never rewritten.
+select = ["E", "F", "B904"]
+ignore = [
+    # E741: the codebase consistently uses `l` for the layer being iterated
+    # (`for l in spec.layers`). Declared here rather than noqa'd line by line.
+    "E741",
+]
