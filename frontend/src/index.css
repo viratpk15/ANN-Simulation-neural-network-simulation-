@@ -10,109 +10,89 @@ html.light {
 }
 
 body {
-  @apply bg-lab-950 text-slate-200 antialiased;
+  @apply bg-lab-950 text-slate-100 antialiased font-sans selection:bg-pink-500/30 selection:text-pink-200;
 }
 html.light body {
-  @apply bg-slate-100 text-slate-800;
+  @apply bg-slate-950 text-slate-100;
 }
 
-/* ---------- shared component classes ---------- */
+/* ---------- futuristic glassmorphism component classes ---------- */
 .panel {
-  @apply bg-lab-900 border border-lab-700/60 rounded-xl shadow-lg;
+  @apply bg-lab-900/85 backdrop-blur-xl border border-lab-700/80 rounded-xl shadow-glass transition-all duration-200;
 }
-html.light .panel {
-  @apply bg-white border-slate-200 shadow;
+.panel:hover {
+  @apply border-lab-600/90;
 }
+
 .panel-title {
-  @apply text-xs font-semibold uppercase tracking-wider text-slate-400;
-}
-html.light .panel-title {
-  @apply text-slate-500;
+  @apply text-xs font-bold uppercase tracking-wider text-purple-300/80 flex items-center gap-1.5;
 }
 
 .input {
-  @apply w-full bg-lab-850 border border-lab-600/70 rounded-md px-2 py-1.5 text-sm
-    focus:outline-none focus:ring-1 focus:ring-lab-accent/70 focus:border-lab-accent/70
-    text-slate-200 placeholder-slate-500;
-}
-html.light .input {
-  @apply bg-white border-slate-300 text-slate-800;
+  @apply w-full bg-lab-850/90 border border-lab-700/80 rounded-lg px-3 py-1.5 text-sm
+    focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/80
+    text-slate-100 placeholder-purple-400/30 transition-all duration-150 shadow-inner;
 }
 .input-num {
   @apply input font-mono;
 }
 
 .btn {
-  @apply inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium
-    transition-colors select-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed
-    bg-lab-700/70 hover:bg-lab-600/80 text-slate-100;
+  @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold
+    transition-all duration-150 select-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed
+    bg-lab-800 hover:bg-lab-750 text-slate-100 border border-lab-700/70 hover:border-purple-500/50 active:scale-[0.98];
 }
-html.light .btn {
-  @apply bg-slate-200 hover:bg-slate-300 text-slate-700;
-}
+
 .btn-primary {
-  @apply btn bg-sky-600 hover:bg-sky-500 text-white;
+  @apply btn bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 hover:from-purple-500 hover:via-pink-500 hover:to-rose-500
+    text-white border-transparent shadow-neon-pink font-bold hover:shadow-[0_0_20px_rgba(236,72,153,0.6)];
 }
-html.light .btn-primary {
-  @apply bg-sky-600 hover:bg-sky-500 text-white;
-}
+
 .btn-danger {
-  @apply btn bg-rose-700/80 hover:bg-rose-600 text-white;
+  @apply btn bg-gradient-to-r from-rose-600 to-pink-700 hover:from-rose-500 hover:to-pink-600
+    text-white border-transparent shadow-[0_0_12px_rgba(244,63,94,0.4)];
 }
+
 .btn-ok {
-  @apply btn bg-emerald-700/80 hover:bg-emerald-600 text-white;
+  @apply btn bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400
+    text-white border-transparent shadow-[0_0_12px_rgba(16,185,129,0.4)];
 }
+
 .btn-ghost {
-  @apply btn bg-transparent hover:bg-lab-700/50 border border-lab-600/60;
-}
-html.light .btn-ghost {
-  @apply hover:bg-slate-200 border-slate-300;
+  @apply btn bg-lab-850/60 hover:bg-lab-800/90 text-purple-200 border border-lab-700/80 hover:border-pink-500/50 hover:text-pink-200;
 }
 
 .tab-btn {
-  @apply px-3 py-1.5 text-xs font-medium rounded-t-md border-b-2 border-transparent
-    text-slate-400 hover:text-slate-200 transition-colors whitespace-nowrap;
-}
-html.light .tab-btn {
-  @apply text-slate-500 hover:text-slate-800;
+  @apply px-3.5 py-2 text-xs font-semibold rounded-t-lg border-b-2 border-transparent
+    text-purple-300/60 hover:text-pink-300 hover:bg-lab-800/40 transition-all whitespace-nowrap;
 }
 .tab-btn.active {
-  @apply text-lab-accent border-lab-accent;
-}
-html.light .tab-btn.active {
-  @apply text-sky-600 border-sky-600;
+  @apply text-pink-300 border-pink-500 bg-gradient-to-b from-purple-950/40 via-purple-900/25 to-pink-950/20 shadow-[0_2px_12px_rgba(236,72,153,0.3)];
 }
 
 .badge {
-  @apply inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold;
+  @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide border;
 }
-.badge-ok { @apply badge bg-emerald-500/15 text-emerald-400; }
-.badge-warn { @apply badge bg-amber-500/15 text-amber-400; }
-.badge-err { @apply badge bg-rose-500/15 text-rose-400; }
-.badge-info { @apply badge bg-sky-500/15 text-sky-400; }
+.badge-ok { @apply badge bg-emerald-500/15 text-emerald-300 border-emerald-500/30 shadow-[0_0_8px_rgba(16,185,129,0.25)]; }
+.badge-warn { @apply badge bg-amber-500/15 text-amber-300 border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.25)]; }
+.badge-err { @apply badge bg-rose-500/15 text-rose-300 border-rose-500/30 shadow-[0_0_8px_rgba(244,63,94,0.25)]; }
+.badge-info { @apply badge bg-pink-500/15 text-pink-300 border-pink-500/30 shadow-[0_0_8px_rgba(236,72,153,0.25)]; }
 
 .card-hover {
-  @apply transition hover:border-lab-accent/60 hover:-translate-y-0.5;
+  @apply transition-all duration-200 hover:border-pink-500/60 hover:shadow-neon-purple hover:-translate-y-0.5;
 }
 
-/* ---------- scrollbars ---------- */
-*::-webkit-scrollbar { width: 8px; height: 8px; }
-*::-webkit-scrollbar-thumb { @apply bg-lab-700 rounded-full; }
-*::-webkit-scrollbar-track { background: transparent; }
-html.light *::-webkit-scrollbar-thumb { @apply bg-slate-300; }
+/* ---------- futuristic glowing scrollbars ---------- */
+*::-webkit-scrollbar { width: 7px; height: 7px; }
+*::-webkit-scrollbar-thumb { @apply bg-lab-700/80 rounded-full hover:bg-purple-500/60 transition-colors; }
+*::-webkit-scrollbar-track { background: rgba(12, 8, 24, 0.4); }
 
-/* ---------- react flow dark theme ---------- */
+/* ---------- react flow dark cyberpunk theme ---------- */
 .react-flow__controls button {
-  @apply bg-lab-800 border-b border-lab-600 fill-slate-300;
+  @apply bg-lab-850 border-b border-lab-700 fill-purple-300 hover:fill-pink-300 hover:bg-lab-800 transition-colors;
 }
 .react-flow__minimap {
-  @apply bg-lab-850;
-}
-html.light .react-flow__minimap {
-  @apply bg-white;
-}
-html.light .react-flow__controls button {
-  @apply bg-white border-slate-200 fill-slate-600;
+  @apply bg-lab-900/90 border border-lab-700/80 rounded-xl shadow-glass;
 }
 
 /* ---------- simulation flow animation ---------- */
@@ -121,14 +101,15 @@ html.light .react-flow__controls button {
 }
 .flow-edge {
   stroke-dasharray: 6 6;
-  animation: dashFlow 1s linear infinite;
+  animation: dashFlow 0.8s linear infinite;
 }
-@keyframes pulseNode {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.55; }
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.6)); }
+  50% { opacity: 0.65; filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.9)); }
 }
-.pulsing { animation: pulseNode 1.2s ease-in-out infinite; }
+.pulsing { animation: pulseGlow 1.4s ease-in-out infinite; }
 
 /* katex sizing inside panels */
-.katex { font-size: 1em; }
-.katex-display { margin: 0.35rem 0; }
+.katex { font-size: 1.05em; }
+.katex-display { margin: 0.4rem 0; }

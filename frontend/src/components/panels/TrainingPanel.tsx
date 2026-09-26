@@ -153,31 +153,31 @@ export function TrainingPanel() {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 flex-1 min-h-[220px]">
-          <div className="panel p-2">
-            <div className="panel-title px-1 pt-1">Loss curves</div>
+          <div className="panel p-3 border-purple-500/30 shadow-glass">
+            <div className="panel-title px-1 pt-1 text-pink-400">Loss curves</div>
             <ResponsiveContainer width="100%" height="88%">
               <LineChart data={chartData} margin={{ top: 8, right: 10, bottom: 0, left: -14 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#233052" />
-                <XAxis dataKey="epoch" fontSize={10} stroke="#64748b" />
-                <YAxis fontSize={10} stroke="#64748b" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#2c1a4d" />
+                <XAxis dataKey="epoch" fontSize={10} stroke="#9d8bb8" />
+                <YAxis fontSize={10} stroke="#9d8bb8" />
                 <Tooltip contentStyle={tooltipStyle} />
                 <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Line type="monotone" dataKey="train loss" stroke="#f87171" dot={false} strokeWidth={1.6} isAnimationActive={false} />
-                <Line type="monotone" dataKey="val loss" stroke="#fb923c" dot={false} strokeWidth={1.6} strokeDasharray="5 3" isAnimationActive={false} />
+                <Line type="monotone" dataKey="train loss" stroke="#ec4899" dot={false} strokeWidth={2} isAnimationActive={false} />
+                <Line type="monotone" dataKey="val loss" stroke="#f472b6" dot={false} strokeWidth={2} strokeDasharray="5 3" isAnimationActive={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <div className="panel p-2">
-            <div className="panel-title px-1 pt-1">{isCls ? 'Accuracy curves' : 'Metric curves (MAE)'}</div>
+          <div className="panel p-3 border-purple-500/30 shadow-glass">
+            <div className="panel-title px-1 pt-1 text-purple-300">{isCls ? 'Accuracy curves' : 'Metric curves (MAE)'}</div>
             <ResponsiveContainer width="100%" height="88%">
               <LineChart data={chartData} margin={{ top: 8, right: 10, bottom: 0, left: -14 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#233052" />
-                <XAxis dataKey="epoch" fontSize={10} stroke="#64748b" />
-                <YAxis fontSize={10} stroke="#64748b" domain={isCls ? [0, 1] : ['auto', 'auto']} tickFormatter={isCls ? (v: number) => `${Math.round(v * 100)}%` : undefined} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#2c1a4d" />
+                <XAxis dataKey="epoch" fontSize={10} stroke="#9d8bb8" />
+                <YAxis fontSize={10} stroke="#9d8bb8" domain={isCls ? [0, 1] : ['auto', 'auto']} tickFormatter={isCls ? (v: number) => `${Math.round(v * 100)}%` : undefined} />
                 <Tooltip contentStyle={tooltipStyle} formatter={isCls ? (v) => pct(v as number) : undefined} />
                 <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Line type="monotone" dataKey={`train ${metricName}`} stroke="#34d399" dot={false} strokeWidth={1.6} isAnimationActive={false} />
-                <Line type="monotone" dataKey={`val ${metricName}`} stroke="#38bdf8" dot={false} strokeWidth={1.6} strokeDasharray="5 3" isAnimationActive={false} />
+                <Line type="monotone" dataKey={`train ${metricName}`} stroke="#a855f7" dot={false} strokeWidth={2} isAnimationActive={false} />
+                <Line type="monotone" dataKey={`val ${metricName}`} stroke="#c084fc" dot={false} strokeWidth={2} strokeDasharray="5 3" isAnimationActive={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -188,5 +188,10 @@ export function TrainingPanel() {
 }
 
 export const tooltipStyle = {
-  background: '#131a2e', border: '1px solid #2f3f69', borderRadius: 8, fontSize: 11,
+  background: 'rgba(19, 13, 36, 0.95)',
+  border: '1px solid rgba(168, 85, 247, 0.5)',
+  borderRadius: 10,
+  fontSize: 12,
+  color: '#f1f5f9',
+  boxShadow: '0 0 15px rgba(168, 85, 247, 0.35)',
 } as const
