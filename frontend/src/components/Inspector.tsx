@@ -32,26 +32,26 @@ export function Inspector() {
   }, [s.activationLibrary, s.savedCustoms])
 
   return (
-    <aside className="w-80 shrink-0 border-l border-purple-500/25 bg-lab-900/85 backdrop-blur-xl overflow-y-auto">
+    <aside className="w-80 shrink-0 border-l border-lab-700 bg-lab-900 overflow-y-auto">
       <div className="p-3.5 space-y-4">
         <div>
           <div className="panel-title mb-2.5 flex items-center justify-between">
-            <span className="text-purple-300 font-bold">Selected layer</span>
+            <span className="text-zinc-200 font-bold">Selected layer</span>
             <button
               onClick={() => s.toggleInspector()}
-              className="text-purple-400 hover:text-pink-300 text-xs px-1.5 py-0.5 rounded hover:bg-lab-800 transition-colors"
+              className="text-zinc-400 hover:text-white text-xs px-1.5 py-0.5 rounded hover:bg-lab-800 transition-colors"
               title="Collapse Inspector"
             >
               ▶
             </button>
           </div>
           {!node && (
-            <div className="text-xs text-purple-300/60 leading-relaxed panel p-4 border-dashed border-purple-500/30 text-center">
+            <div className="text-xs text-zinc-400 leading-relaxed panel p-4 border-dashed border-zinc-700 text-center">
               Click a layer on the canvas to configure parameters and view shapes. Shift-click multi-selects; Delete removes.
             </div>
           )}
           {node && (
-            <div className="panel p-3.5 space-y-3.5 border-purple-500/30 shadow-glass">
+            <div className="panel p-3.5 space-y-3.5 border-lab-700 shadow-subtle">
               <Field label="Display name">
                 <TextInput value={node.data.label} onChange={(lbl) => s.renameNode(node.id, lbl)} />
               </Field>

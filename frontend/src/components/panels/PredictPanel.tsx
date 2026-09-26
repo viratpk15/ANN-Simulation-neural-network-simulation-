@@ -90,8 +90,8 @@ export function PredictPanel() {
         {/* 8x8 Interactive Visual Canvas */}
         {isImage8x8 ? (
           <div className="space-y-2">
-            <div className="text-[11px] text-slate-400">Click or drag pixels to draw 8×8 image:</div>
-            <div className="flex justify-center p-2 bg-lab-950/80 rounded border border-lab-700/60">
+            <div className="text-[11px] text-zinc-400">Click or drag pixels to draw 8×8 image:</div>
+            <div className="flex justify-center p-2 bg-lab-950 rounded border border-lab-700">
               <div className="grid grid-cols-8 gap-1 w-48 h-48">
                 {values.map((v, i) => {
                   const active = Number(v) > 0.4
@@ -106,8 +106,8 @@ export function PredictPanel() {
                       }}
                       className={`rounded-sm transition-colors border ${
                         active
-                          ? 'bg-sky-400 border-sky-300 shadow-[0_0_6px_rgba(56,189,248,0.5)]'
-                          : 'bg-lab-800/80 border-lab-700/40 hover:bg-lab-700/60'
+                          ? 'bg-blue-600 border-blue-400 shadow-[0_0_6px_rgba(59,130,246,0.6)]'
+                          : 'bg-lab-850 border-lab-700 hover:bg-lab-800'
                       }`}
                       title={`Pixel ${i} (Row ${Math.floor(i / 8)}, Col ${i % 8}): ${v}`}
                     />
@@ -121,7 +121,7 @@ export function PredictPanel() {
               <button className="btn-ghost !py-0.5 !px-1.5 !text-[10px]" onClick={() => apply8x8Shape('horizontal')}>— Horiz</button>
               <button className="btn-ghost !py-0.5 !px-1.5 !text-[10px]" onClick={() => apply8x8Shape('box')}>▢ Box</button>
               <button className="btn-ghost !py-0.5 !px-1.5 !text-[10px]" onClick={() => apply8x8Shape('random')}>🎲 Rand</button>
-              <button className="btn-ghost !py-0.5 !px-1.5 !text-[10px] text-rose-400" onClick={() => apply8x8Shape('zeros')}>✕ Clear</button>
+              <button className="btn-ghost !py-0.5 !px-1.5 !text-[10px] text-rose-400 hover:text-rose-300" onClick={() => apply8x8Shape('zeros')}>✕ Clear</button>
             </div>
           </div>
         ) : featureNames.length === 4 ? (
@@ -188,7 +188,7 @@ export function PredictPanel() {
             <div className="panel p-4 flex items-center gap-6 flex-wrap">
               <div>
                 <div className="panel-title">Prediction</div>
-                <div className="text-2xl font-bold text-lab-accent">
+                <div className="text-2xl font-bold text-white">
                   {res.prediction.type === 'regression' ? fmt(res.prediction.value ?? null) : res.prediction.label}
                 </div>
               </div>
@@ -196,12 +196,12 @@ export function PredictPanel() {
                 <div className="flex-1 min-w-[220px] space-y-1">
                   {res.probabilities.map((p, i) => (
                     <div key={i} className="flex items-center gap-2 text-xs">
-                      <span className="w-24 truncate text-slate-400">{classes?.[i] ?? `class ${i}`}</span>
+                      <span className="w-24 truncate text-zinc-400">{classes?.[i] ?? `class ${i}`}</span>
                       <div className="flex-1 h-3 rounded bg-lab-800 overflow-hidden">
-                        <div className="h-full rounded bg-gradient-to-r from-sky-500 to-emerald-400"
+                        <div className="h-full rounded bg-gradient-to-r from-blue-600 to-emerald-500"
                           style={{ width: `${Math.max(1, p * 100)}%` }} />
                       </div>
-                      <span className="w-14 text-right font-mono">{pct(p)}</span>
+                      <span className="w-14 text-right font-mono text-zinc-200">{pct(p)}</span>
                     </div>
                   ))}
                 </div>
@@ -222,17 +222,17 @@ export function PredictPanel() {
               <div className="flex gap-3 flex-wrap">
                 {(res.top_neurons ?? []).map((l) => (
                   <div key={l.layer_id} className="panel !bg-lab-850 p-2 min-w-[150px]">
-                    <div className="text-[11px] font-semibold text-violet-300 mb-1">{l.layer}</div>
+                    <div className="text-[11px] font-semibold text-zinc-200 mb-1">{l.layer}</div>
                     {l.top.map((t) => (
-                      <div key={t.neuron} className="flex justify-between text-[11px] font-mono text-slate-300">
+                      <div key={t.neuron} className="flex justify-between text-[11px] font-mono text-zinc-300">
                         <span>neuron {t.neuron + 1}</span>
-                        <span className="text-emerald-300">{t.value >= 0 ? '+' : ''}{t.value}</span>
+                        <span className="text-emerald-400 font-medium">{t.value >= 0 ? '+' : ''}{t.value}</span>
                       </div>
                     ))}
                   </div>
                 ))}
               </div>
-              <div className="text-[10px] text-slate-500 mt-2">⚠ {res.note}</div>
+              <div className="text-[10px] text-zinc-500 mt-2">⚠ {res.note}</div>
             </div>
           </>
         )}

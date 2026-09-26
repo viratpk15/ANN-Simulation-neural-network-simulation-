@@ -4,9 +4,9 @@ import type { LayerCatalogCategory, LayerKind } from '../types'
 
 /** Accent colour per category, so BASIC / CNN / ADVANCED read differently. */
 const CATEGORY_STYLE: Record<string, { chip: string; ring: string }> = {
-  BASIC: { chip: 'bg-pink-500/20 text-pink-300 border border-pink-500/40', ring: 'text-pink-400' },
-  CNN: { chip: 'bg-purple-500/20 text-purple-300 border border-purple-500/40', ring: 'text-purple-400' },
-  ADVANCED: { chip: 'bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/40', ring: 'text-fuchsia-400' },
+  BASIC: { chip: 'bg-emerald-950/70 text-emerald-300 border border-emerald-700/50', ring: 'text-emerald-400' },
+  CNN: { chip: 'bg-indigo-950/70 text-indigo-300 border border-indigo-700/50', ring: 'text-indigo-400' },
+  ADVANCED: { chip: 'bg-blue-950/70 text-blue-300 border border-blue-700/50', ring: 'text-blue-400' },
 }
 
 function LayerCard({ entry, category }: { entry: LayerCatalogCategory['layers'][number]; category: string }) {
@@ -26,7 +26,7 @@ function LayerCard({ entry, category }: { entry: LayerCatalogCategory['layers'][
         'panel p-2.5 select-none transition-all duration-150',
         disabled
           ? 'opacity-40 cursor-not-allowed'
-          : 'card-hover cursor-grab active:cursor-grabbing hover:bg-lab-800/80',
+          : 'card-hover cursor-grab active:cursor-grabbing hover:bg-lab-800',
       ].join(' ')}
       title={[
         entry.formula,
@@ -38,15 +38,15 @@ function LayerCard({ entry, category }: { entry: LayerCatalogCategory['layers'][
     >
       <div className="flex items-center gap-1.5">
         <span className={accent.ring}>{entry.icon}</span>
-        <span className="font-bold text-xs leading-tight text-slate-100">{entry.name}</span>
+        <span className="font-bold text-xs leading-tight text-white">{entry.name}</span>
         {disabled && (
-          <span className="ml-auto text-[9px] uppercase tracking-wide bg-purple-950/80 text-purple-300 border border-purple-500/30 px-1.5 py-[1px] rounded">
+          <span className="ml-auto text-[9px] uppercase tracking-wide bg-zinc-800 text-zinc-400 border border-zinc-700 px-1.5 py-[1px] rounded">
             soon
           </span>
         )}
-        {!disabled && <span className="ml-auto text-[10px] text-purple-400/50">⠿</span>}
+        {!disabled && <span className="ml-auto text-[10px] text-zinc-500">⠿</span>}
       </div>
-      <p className="text-[11px] text-purple-300/70 mt-1 leading-snug line-clamp-2">
+      <p className="text-[11px] text-zinc-400 mt-1 leading-snug line-clamp-2">
         {disabled ? entry.coming_soon_note : entry.description}
       </p>
     </div>
@@ -62,12 +62,12 @@ function CategorySection({ cat, defaultOpen }: { cat: LayerCatalogCategory; defa
     <div className="mb-2">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-lab-800/80 transition-colors"
+        className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-lab-800 transition-colors"
         aria-expanded={open}
       >
-        <span className={`text-[10px] transition-transform ${open ? 'rotate-90 text-pink-400' : 'text-purple-400'}`}>▶</span>
+        <span className={`text-[10px] transition-transform ${open ? 'rotate-90 text-blue-400' : 'text-zinc-500'}`}>▶</span>
         <span className={`text-xs font-bold tracking-wider ${accent.ring}`}>{cat.category}</span>
-        <span className="text-[10px] text-purple-300/50 ml-auto font-mono">
+        <span className="text-[10px] text-zinc-500 ml-auto font-mono">
           {supported}/{cat.layers.length}
         </span>
       </button>
@@ -88,19 +88,19 @@ export function Sidebar() {
   useEffect(() => { void loadLayerCatalog() }, [loadLayerCatalog])
 
   return (
-    <aside className="w-64 shrink-0 border-r border-purple-500/25 bg-lab-900/80 backdrop-blur-xl flex flex-col overflow-hidden">
+    <aside className="w-64 shrink-0 border-r border-lab-700 bg-lab-900 flex flex-col overflow-hidden">
       {/* Layer palette: collapsible so the long list never forces endless scrolling. */}
       <div className="p-3.5 overflow-y-auto flex-1 min-h-0">
         <div className="panel-title mb-2.5 flex items-center justify-between">
           <div className="flex items-center gap-1.5">
-            <span className="text-pink-400">Layers</span>
-            <span className="text-[10px] font-normal text-purple-300/60 normal-case font-mono">
+            <span className="text-zinc-200">Layers</span>
+            <span className="text-[10px] font-normal text-zinc-500 normal-case font-mono">
               ({catalog.reduce((n, c) => n + c.layers.filter((l) => l.supported).length, 0)} available)
             </span>
           </div>
           <button
             onClick={() => s.toggleSidebar()}
-            className="text-purple-400 hover:text-pink-300 text-xs px-1.5 py-0.5 rounded hover:bg-lab-800 transition-colors"
+            className="text-zinc-400 hover:text-white text-xs px-1.5 py-0.5 rounded hover:bg-lab-800 transition-colors"
             title="Collapse Sidebar"
           >
             ◀
@@ -109,13 +109,13 @@ export function Sidebar() {
         {catalog.map((c) => (
           <CategorySection key={c.category} cat={c} defaultOpen={c.category === 'BASIC'} />
         ))}
-        <p className="text-[10px] text-purple-300/50 leading-snug mt-2 px-1">
+        <p className="text-[10px] text-zinc-500 leading-snug mt-2 px-1">
           Greyed-out layers are for architectural preview and cannot be added yet.
         </p>
       </div>
 
-      <div className="p-3.5 border-t border-purple-500/20 bg-lab-950/40">
-        <div className="panel-title mb-2 text-purple-300">Datasets</div>
+      <div className="p-3.5 border-t border-lab-700 bg-lab-950/40">
+        <div className="panel-title mb-2 text-zinc-300">Datasets</div>
         <div className="space-y-1.5 max-h-56 overflow-auto pr-1">
           {s.datasets.map((d) => {
             const active = (d.kind === 'builtin' && s.dataset.kind === 'builtin' && s.dataset.name === d.id) ||
@@ -125,8 +125,8 @@ export function Sidebar() {
                 key={`${d.kind}-${d.id}`}
                 className={`w-full text-left px-2.5 py-2 rounded-lg text-xs transition-all border ${
                   active
-                    ? 'bg-gradient-to-r from-purple-900/60 to-pink-900/60 text-pink-200 border-pink-500/50 shadow-[0_0_12px_rgba(236,72,153,0.3)]'
-                    : 'hover:bg-lab-800 text-slate-300 border-transparent hover:border-purple-500/30'
+                    ? 'bg-blue-950/60 text-blue-200 border-blue-500/50 shadow-sm'
+                    : 'hover:bg-lab-800 text-zinc-300 border-transparent hover:border-zinc-700'
                 }`}
                 onClick={() => {
                   if (d.kind === 'builtin') s.setDatasetSelection({ kind: 'builtin', name: d.id, upload_id: undefined })
@@ -136,7 +136,7 @@ export function Sidebar() {
                 title={d.description}
               >
                 <div className="font-semibold truncate">{d.name}</div>
-                <div className="text-[10px] text-purple-300/60 font-mono mt-0.5">{d.samples} · {d.n_features}f · {d.task}{d.n_classes ? ` · ${d.n_classes}cls` : ''}</div>
+                <div className="text-[10px] text-zinc-400 font-mono mt-0.5">{d.samples} · {d.n_features}f · {d.task}{d.n_classes ? ` · ${d.n_classes}cls` : ''}</div>
               </button>
             )
           })}
@@ -146,8 +146,8 @@ export function Sidebar() {
         </button>
       </div>
 
-      <div className="mt-auto p-3 border-t border-purple-500/20 text-[11px] text-purple-300/60 leading-snug bg-lab-950/60">
-        <b className="text-pink-300">Quick start:</b> Drag nodes, connect handles, pick a dataset, then click <b className="text-emerald-400">▶ Train</b>.
+      <div className="mt-auto p-3 border-t border-lab-700 text-[11px] text-zinc-400 leading-snug bg-lab-950/60">
+        <b className="text-white">Quick start:</b> Drag nodes, connect handles, pick a dataset, then click <b className="text-blue-400">▶ Train</b>.
       </div>
     </aside>
   )

@@ -4,20 +4,20 @@ import { shapeText, useAppStore, type LayerNodeData } from '../../store/useAppSt
 import type { LayerKind } from '../../types'
 
 const KIND_STYLE: Record<LayerKind, { ring: string; chip: string; title: string }> = {
-  input: { ring: 'border-pink-500/70 hover:border-pink-400', chip: 'bg-pink-500/20 text-pink-300 border border-pink-500/40', title: 'Input layer' },
-  dense: { ring: 'border-purple-500/70 hover:border-purple-400', chip: 'bg-purple-500/20 text-purple-300 border border-purple-500/40', title: 'Fully-connected (dense) layer' },
-  activation: { ring: 'border-fuchsia-500/70 hover:border-fuchsia-400', chip: 'bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/40', title: 'Activation layer' },
-  dropout: { ring: 'border-amber-500/70 hover:border-amber-400', chip: 'bg-amber-500/20 text-amber-300 border border-amber-500/40', title: 'Dropout regularization layer' },
-  batchnorm: { ring: 'border-violet-400/70 hover:border-violet-300', chip: 'bg-violet-500/20 text-violet-300 border border-violet-400/40', title: 'Batch normalization layer' },
-  flatten: { ring: 'border-indigo-400/70 hover:border-indigo-300', chip: 'bg-indigo-500/20 text-indigo-300 border border-indigo-400/40', title: 'Flatten layer' },
-  conv2d: { ring: 'border-pink-400/70 hover:border-pink-300', chip: 'bg-pink-600/20 text-pink-300 border border-pink-400/40', title: '2-D convolutional layer' },
-  maxpool: { ring: 'border-purple-400/70 hover:border-purple-300', chip: 'bg-purple-600/20 text-purple-300 border border-purple-400/40', title: 'Max pooling layer' },
-  avgpool: { ring: 'border-violet-500/70 hover:border-violet-400', chip: 'bg-violet-600/20 text-violet-300 border border-violet-500/40', title: 'Average pooling layer' },
-  globalavgpool: { ring: 'border-fuchsia-400/70 hover:border-fuchsia-300', chip: 'bg-fuchsia-600/20 text-fuchsia-300 border border-fuchsia-400/40', title: 'Global average pooling layer' },
-  output: { ring: 'border-rose-400/80 hover:border-rose-300', chip: 'bg-rose-500/20 text-rose-300 border border-rose-400/40', title: 'Output layer' },
-  embedding: { ring: 'border-slate-600/60', chip: 'bg-slate-600/30 text-slate-400', title: 'Embedding (coming soon)' },
-  lstm: { ring: 'border-slate-600/60', chip: 'bg-slate-600/30 text-slate-400', title: 'LSTM (coming soon)' },
-  gru: { ring: 'border-slate-600/60', chip: 'bg-slate-600/30 text-slate-400', title: 'GRU (coming soon)' },
+  input: { ring: 'border-emerald-500/50 hover:border-emerald-400', chip: 'bg-emerald-950/70 text-emerald-300 border border-emerald-700/50', title: 'Input layer' },
+  dense: { ring: 'border-blue-500/50 hover:border-blue-400', chip: 'bg-blue-950/70 text-blue-300 border border-blue-700/50', title: 'Fully-connected (dense) layer' },
+  activation: { ring: 'border-amber-500/50 hover:border-amber-400', chip: 'bg-amber-950/70 text-amber-300 border border-amber-700/50', title: 'Activation layer' },
+  dropout: { ring: 'border-orange-500/50 hover:border-orange-400', chip: 'bg-orange-950/70 text-orange-300 border border-orange-700/50', title: 'Dropout regularization layer' },
+  batchnorm: { ring: 'border-violet-500/50 hover:border-violet-400', chip: 'bg-violet-950/70 text-violet-300 border border-violet-700/50', title: 'Batch normalization layer' },
+  flatten: { ring: 'border-slate-500/50 hover:border-slate-400', chip: 'bg-slate-900 text-slate-300 border border-slate-700/50', title: 'Flatten layer' },
+  conv2d: { ring: 'border-indigo-500/50 hover:border-indigo-400', chip: 'bg-indigo-950/70 text-indigo-300 border border-indigo-700/50', title: '2-D convolutional layer' },
+  maxpool: { ring: 'border-cyan-500/50 hover:border-cyan-400', chip: 'bg-cyan-950/70 text-cyan-300 border border-cyan-700/50', title: 'Max pooling layer' },
+  avgpool: { ring: 'border-sky-500/50 hover:border-sky-400', chip: 'bg-sky-950/70 text-sky-300 border border-sky-700/50', title: 'Average pooling layer' },
+  globalavgpool: { ring: 'border-teal-500/50 hover:border-teal-400', chip: 'bg-teal-950/70 text-teal-300 border border-teal-700/50', title: 'Global average pooling layer' },
+  output: { ring: 'border-rose-500/50 hover:border-rose-400', chip: 'bg-rose-950/70 text-rose-300 border border-rose-700/50', title: 'Output layer' },
+  embedding: { ring: 'border-zinc-700', chip: 'bg-zinc-800 text-zinc-400', title: 'Embedding (coming soon)' },
+  lstm: { ring: 'border-zinc-700', chip: 'bg-zinc-800 text-zinc-400', title: 'LSTM (coming soon)' },
+  gru: { ring: 'border-zinc-700', chip: 'bg-zinc-800 text-zinc-400', title: 'GRU (coming soon)' },
 }
 
 /** One-line configuration summary shown under the layer name. */
@@ -60,8 +60,8 @@ function LayerNode({ id, data, selected }: NodeProps<LayerNodeData>) {
 
   return (
     <div
-      className={`rounded-xl border-2 ${style.ring} bg-lab-900/90 backdrop-blur-md shadow-glass min-w-[170px] px-3.5 py-2.5 transition-all duration-200 ${
-        selected ? 'ring-2 ring-pink-500 shadow-neon-pink scale-[1.02]' : 'hover:shadow-neon-purple hover:scale-[1.01]'
+      className={`rounded-xl border ${style.ring} bg-lab-900 shadow-subtle min-w-[170px] px-3.5 py-2.5 transition-all duration-150 ${
+        selected ? 'ring-2 ring-blue-500 shadow-elevated scale-[1.02]' : 'hover:scale-[1.01]'
       }`}
       title={[
         style.title,
@@ -74,24 +74,24 @@ function LayerNode({ id, data, selected }: NodeProps<LayerNodeData>) {
         <Handle
           type="target"
           position={Position.Left}
-          className="!bg-pink-500 !border-2 !border-purple-300 !w-3 !h-3 shadow-[0_0_8px_rgba(236,72,153,0.9)]"
+          className="!bg-blue-500 !border-2 !border-zinc-950 !w-3 !h-3"
         />
       )}
       <div className="flex items-center gap-2">
         <span className={`badge ${style.chip}`}>{data.kind}</span>
         {shape && shape.params > 0 && (
-          <span className="ml-auto text-[10px] font-mono text-purple-300/80 font-medium" title="Trainable parameters">
+          <span className="ml-auto text-[10px] font-mono text-zinc-400 font-medium" title="Trainable parameters">
             {shape.params.toLocaleString()} θ
           </span>
         )}
       </div>
-      <div className="font-bold text-sm mt-1 truncate max-w-[200px] text-slate-100">{data.label}</div>
-      <div className="text-xs text-purple-300/70 font-mono mt-0.5">{subtitle}</div>
+      <div className="font-bold text-sm mt-1 truncate max-w-[200px] text-white">{data.label}</div>
+      <div className="text-xs text-zinc-400 font-mono mt-0.5">{subtitle}</div>
       {/* Shape propagation: show the real inferred input → output shape. */}
       {shape?.out_shape && (
-        <div className="text-[11px] text-pink-300/90 font-mono mt-1 flex items-center gap-1">
-          <span className="text-slate-400">{shape.in_shape ? `${shapeText(shape.in_shape)} → ` : ''}</span>
-          <b className="text-pink-300 font-semibold">{shapeText(shape.out_shape)}</b>
+        <div className="text-[11px] text-zinc-300 font-mono mt-1 flex items-center gap-1">
+          <span className="text-zinc-500">{shape.in_shape ? `${shapeText(shape.in_shape)} → ` : ''}</span>
+          <b className="text-blue-300 font-medium">{shapeText(shape.out_shape)}</b>
         </div>
       )}
       {issue && <div className="text-xs text-rose-400 mt-1.5 max-w-[200px] leading-tight font-medium">⚠ {issue.message}</div>}
@@ -99,7 +99,7 @@ function LayerNode({ id, data, selected }: NodeProps<LayerNodeData>) {
         <Handle
           type="source"
           position={Position.Right}
-          className="!bg-purple-500 !border-2 !border-pink-300 !w-3 !h-3 shadow-[0_0_8px_rgba(168,85,247,0.9)]"
+          className="!bg-blue-500 !border-2 !border-zinc-950 !w-3 !h-3"
         />
       )}
     </div>

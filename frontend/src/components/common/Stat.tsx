@@ -2,19 +2,19 @@ import type { ReactNode } from 'react'
 
 export function Stat({ label, value, hint, accent }: { label: string; value: ReactNode; hint?: string; accent?: string }) {
   return (
-    <div className="panel px-3.5 py-2 min-w-[120px] border-purple-500/30 hover:border-pink-500/50 shadow-glass transition-all duration-150" title={hint}>
-      <div className="panel-title flex items-center gap-1.5 text-purple-300/80">
+    <div className="panel px-3.5 py-2 min-w-[120px] bg-lab-900 border-lab-700 hover:border-zinc-500 transition-all duration-150" title={hint}>
+      <div className="panel-title flex items-center gap-1.5 text-zinc-400">
         {label}
         {hint && <InfoDot text={hint} />}
       </div>
-      <div className={`text-lg font-mono font-bold mt-1 text-slate-100 ${accent ?? 'text-pink-300'}`}>{value}</div>
+      <div className={`text-lg font-mono font-bold mt-1 ${accent ?? 'text-white'}`}>{value}</div>
     </div>
   )
 }
 
 export function InfoDot({ text }: { text: string }) {
   return (
-    <span className="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full bg-purple-900/80 border border-purple-500/40 text-[9px] text-pink-300 cursor-help font-mono"
+    <span className="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full bg-zinc-800 border border-zinc-700 text-[9px] text-zinc-400 hover:text-white cursor-help font-mono"
       title={text}>?</span>
   )
 }

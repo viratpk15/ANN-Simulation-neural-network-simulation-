@@ -47,20 +47,20 @@ export function BottomTabs() {
   }
 
   return (
-    <div className={`${heightClass} shrink-0 border-t border-lab-700/60 bg-lab-900/80 backdrop-blur flex flex-col transition-all duration-150 z-10`}>
-      <div className="flex items-center justify-between px-2 border-b border-lab-700/60 bg-lab-950/60 min-h-10">
+    <div className={`${heightClass} shrink-0 border-t border-lab-700 bg-lab-900 flex flex-col transition-all duration-150 z-10`}>
+      <div className="flex items-center justify-between px-2 border-b border-lab-700 bg-lab-950/60 min-h-10">
         <div className="flex items-center gap-0.5 overflow-x-auto py-0.5">
           {TABS.map((t) => (
             <button
               key={t.id}
-              className={`tab-btn flex items-center gap-1.5 !py-1 !px-2.5 ${s.activeTab === t.id && size !== 'collapsed' ? 'active bg-lab-800/60' : ''}`}
+              className={`tab-btn flex items-center gap-1.5 !py-1 !px-2.5 ${s.activeTab === t.id && size !== 'collapsed' ? 'active' : ''}`}
               onClick={() => handleTabClick(t.id)}
               title={`Switch to ${t.label} (Click again to collapse/expand)`}
             >
               <span className="text-xs">{t.icon}</span>
               <span className="text-xs font-medium">{t.label}</span>
               {t.id === 'console' && (
-                <span className="ml-1 text-[9px] px-1 py-0.2 rounded bg-lab-800 text-slate-400">
+                <span className="ml-1 text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400">
                   {s.consoleLog.length}
                 </span>
               )}
@@ -69,31 +69,31 @@ export function BottomTabs() {
         </div>
 
         {/* Panel size controls */}
-        <div className="flex items-center gap-1 pl-2 border-l border-lab-700/60 shrink-0">
+        <div className="flex items-center gap-1 pl-2 border-l border-lab-700 shrink-0">
           <button
             onClick={() => s.setBottomPanelSize(size === 'collapsed' ? 'normal' : 'collapsed')}
-            className={`px-1.5 py-0.5 rounded text-[11px] text-slate-400 hover:text-slate-200 hover:bg-lab-800 ${size === 'collapsed' ? 'bg-sky-500/20 text-sky-300' : ''}`}
+            className={`px-1.5 py-0.5 rounded text-[11px] text-zinc-400 hover:text-white hover:bg-lab-800 ${size === 'collapsed' ? 'bg-zinc-700 text-white font-medium' : ''}`}
             title="Collapse bottom panel to give canvas maximum space"
           >
             {size === 'collapsed' ? '▲ Show' : '_ Hide'}
           </button>
           <button
             onClick={() => s.setBottomPanelSize('compact')}
-            className={`px-1.5 py-0.5 rounded text-[11px] text-slate-400 hover:text-slate-200 hover:bg-lab-800 ${size === 'compact' ? 'bg-sky-500/20 text-sky-300' : ''}`}
+            className={`px-1.5 py-0.5 rounded text-[11px] text-zinc-400 hover:text-white hover:bg-lab-800 ${size === 'compact' ? 'bg-zinc-700 text-white font-medium' : ''}`}
             title="Compact height (256px)"
           >
             ▫ Compact
           </button>
           <button
             onClick={() => s.setBottomPanelSize('normal')}
-            className={`px-1.5 py-0.5 rounded text-[11px] text-slate-400 hover:text-slate-200 hover:bg-lab-800 ${size === 'normal' ? 'bg-sky-500/20 text-sky-300' : ''}`}
+            className={`px-1.5 py-0.5 rounded text-[11px] text-zinc-400 hover:text-white hover:bg-lab-800 ${size === 'normal' ? 'bg-zinc-700 text-white font-medium' : ''}`}
             title="Normal height (330px)"
           >
             ◽ Normal
           </button>
           <button
             onClick={() => s.setBottomPanelSize('expanded')}
-            className={`px-1.5 py-0.5 rounded text-[11px] text-slate-400 hover:text-slate-200 hover:bg-lab-800 ${size === 'expanded' ? 'bg-sky-500/20 text-sky-300' : ''}`}
+            className={`px-1.5 py-0.5 rounded text-[11px] text-zinc-400 hover:text-white hover:bg-lab-800 ${size === 'expanded' ? 'bg-zinc-700 text-white font-medium' : ''}`}
             title="Expand height (520px)"
           >
             ⤢ Max

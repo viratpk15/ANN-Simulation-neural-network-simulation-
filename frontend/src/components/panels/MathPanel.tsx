@@ -174,7 +174,7 @@ function ActivationSection({ layer }: { layer: TraceLayer }) {
   return (
     <div className="panel p-3 space-y-3">
       <div className="flex items-baseline gap-3 flex-wrap">
-        <h3 className="font-semibold text-fuchsia-300">{layer.label}</h3>
+        <h3 className="font-semibold text-blue-300">{layer.label}</h3>
         <span className="text-xs text-slate-400">
           Activation — <MathBlock tex={actTex(layer.activation)} block={false} /> applied element-wise
         </span>

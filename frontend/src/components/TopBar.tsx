@@ -20,20 +20,19 @@ export function TopBar() {
   const running = job.state === 'running' || job.state === 'paused' || job.state === 'queued'
 
   return (
-    <header className="flex items-center gap-2.5 px-4 h-14 border-b border-purple-500/25 bg-lab-900/90 backdrop-blur-xl z-20 relative shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-      <div className="flex items-center gap-2.5 pr-3 border-r border-lab-700/80">
+    <header className="flex items-center gap-2.5 px-4 h-14 border-b border-lab-700 bg-lab-900 z-20 relative shadow-subtle">
+      <div className="flex items-center gap-2.5 pr-3 border-r border-lab-750">
         <div className="relative">
-          <img src="/brain.svg" alt="NeuroSim Lab" className="h-8 w-8 filter drop-shadow-[0_0_8px_rgba(236,72,153,0.6)]" />
-          <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-pink-500"></span>
+          <img src="/brain.svg" alt="NeuroSim Lab" className="h-8 w-8 filter drop-shadow-sm" />
+          <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
         </div>
         <div className="leading-tight">
-          <div className="font-extrabold text-base bg-gradient-to-r from-pink-400 via-purple-300 to-indigo-300 bg-clip-text text-transparent tracking-wide">
+          <div className="font-bold text-base text-white tracking-tight">
             NeuroSim Lab
           </div>
-          <div className="text-[10px] text-purple-300/70 font-mono hidden xl:block">
+          <div className="text-[10px] text-zinc-400 font-mono hidden xl:block">
             Neural Simulation · Visuals · AI Diagnosis
           </div>
         </div>
@@ -50,7 +49,7 @@ export function TopBar() {
       <div className="relative">
         <button className="btn-ghost !py-1" onClick={() => { setProjectsOpen(!projectsOpen); void s.loadProjects() }}>Projects</button>
         {projectsOpen && (
-          <div className="absolute top-10 left-0 w-72 panel p-2.5 z-30 max-h-80 overflow-auto border-purple-500/40 bg-lab-900/95 shadow-2xl backdrop-blur-2xl">
+          <div className="absolute top-10 left-0 w-72 panel p-2.5 z-30 max-h-80 overflow-auto border-lab-600 bg-lab-900 shadow-elevated">
             <div className="flex gap-1.5 mb-2">
               <button className="btn-primary !py-1 flex-1 text-xs" onClick={() => void s.saveProject()}>Save current</button>
               <button className="btn-ghost !py-1 flex-1 text-xs" onClick={() => void s.exportProject()}>Export .nnsim</button>
@@ -58,10 +57,10 @@ export function TopBar() {
             <button className="btn-ghost !py-1 w-full mb-2 text-xs" onClick={() => fileRef.current?.click()}>Import .nnsim…</button>
             <input ref={fileRef} type="file" accept=".nnsim,.json" className="hidden"
               onChange={(e) => { const f = e.target.files?.[0]; if (f) void s.importProject(f); e.target.value = '' }} />
-            {s.projects.length === 0 && <div className="text-xs text-slate-500 p-2">No saved projects yet.</div>}
+            {s.projects.length === 0 && <div className="text-xs text-zinc-500 p-2">No saved projects yet.</div>}
             {s.projects.map((p) => (
               <div key={p.id} className="flex items-center justify-between gap-1 px-1.5 py-1 rounded hover:bg-lab-800 text-xs">
-                <button className="text-left flex-1 truncate text-purple-200" onClick={() => { void s.loadProject(p.id); setProjectsOpen(false) }}
+                <button className="text-left flex-1 truncate text-zinc-200" onClick={() => { void s.loadProject(p.id); setProjectsOpen(false) }}
                   title={`Updated ${p.updated_at}`}>{p.name}</button>
                 <button className="text-rose-400 text-xs px-1 hover:text-rose-300" title="Delete"
                   onClick={() => void s.deleteProject(p.id)}>✕</button>
@@ -71,11 +70,11 @@ export function TopBar() {
         )}
       </div>
 
-      <div className="h-6 border-l border-lab-700/60 mx-1" />
+      <div className="h-6 border-l border-lab-750 mx-1" />
 
       <div className="relative">
         <button
-          className="btn-primary !py-1.5 !px-3 flex items-center gap-1.5 text-xs"
+          className="btn-preset !py-1.5 !px-3 flex items-center gap-1.5 text-xs font-semibold"
           onClick={() => setPresetsOpen(!presetsOpen)}
           title="Load preconfigured demo networks (XOR, Iris, CNN)"
         >
@@ -83,28 +82,28 @@ export function TopBar() {
           <span className="text-[10px]">▾</span>
         </button>
         {presetsOpen && (
-          <div className="absolute top-10 left-0 w-84 panel p-2.5 z-30 space-y-1.5 shadow-2xl border border-purple-500/50 bg-lab-900/95 backdrop-blur-2xl">
-            <div className="text-[10px] font-bold text-purple-300/80 px-2 py-0.5 uppercase tracking-wider">Example Architectures</div>
+          <div className="absolute top-10 left-0 w-84 panel p-2.5 z-30 space-y-1.5 shadow-elevated border border-lab-600 bg-lab-900">
+            <div className="text-[10px] font-bold text-zinc-400 px-2 py-0.5 uppercase tracking-wider">Example Architectures</div>
             <button
-              className="w-full text-left p-2 rounded-lg hover:bg-purple-950/60 transition-colors border border-transparent hover:border-pink-500/40"
+              className="w-full text-left p-2 rounded-lg hover:bg-lab-800 transition-colors border border-transparent hover:border-blue-500/40"
               onClick={() => { void s.loadPreset('xor-demo'); setPresetsOpen(false) }}
             >
-              <div className="text-xs font-bold text-pink-400">⚡ XOR Demo (Try Example)</div>
-              <div className="text-[10px] text-purple-300/70">2 → 8 → 8 → 2 feedforward network on XOR</div>
+              <div className="text-xs font-bold text-blue-400">⚡ XOR Demo (Try Example)</div>
+              <div className="text-[10px] text-zinc-400">2 → 8 → 8 → 2 feedforward network on XOR</div>
             </button>
             <button
-              className="w-full text-left p-2 rounded-lg hover:bg-purple-950/60 transition-colors border border-transparent hover:border-purple-500/40"
+              className="w-full text-left p-2 rounded-lg hover:bg-lab-800 transition-colors border border-transparent hover:border-emerald-500/40"
               onClick={() => { void s.loadPreset('iris-research'); setPresetsOpen(false) }}
             >
-              <div className="text-xs font-bold text-purple-300">🌸 Iris Research Experiment</div>
-              <div className="text-[10px] text-purple-300/70">4 → 16 → 8 → 3 multi-class classifier</div>
+              <div className="text-xs font-bold text-emerald-400">🌸 Iris Research Experiment</div>
+              <div className="text-[10px] text-zinc-400">4 → 16 → 8 → 3 multi-class classifier</div>
             </button>
             <button
-              className="w-full text-left p-2 rounded-lg hover:bg-purple-950/60 transition-colors border border-transparent hover:border-fuchsia-500/40"
+              className="w-full text-left p-2 rounded-lg hover:bg-lab-800 transition-colors border border-transparent hover:border-indigo-500/40"
               onClick={() => { void s.loadPreset('cnn-shapes'); setPresetsOpen(false) }}
             >
-              <div className="text-xs font-bold text-fuchsia-300">🖼️ CNN Demo (Conv + Pool + BatchNorm)</div>
-              <div className="text-[10px] text-purple-300/70">8×8×1 → Conv2D(8) → MaxPool → Flatten → Dense 16 → 3 on shapes8</div>
+              <div className="text-xs font-bold text-indigo-400">🖼️ CNN Demo (Conv + Pool + BatchNorm)</div>
+              <div className="text-[10px] text-zinc-400">8×8×1 → Conv2D(8) → MaxPool → Flatten → Dense 16 → 3 on shapes8</div>
             </button>
           </div>
         )}
@@ -119,10 +118,10 @@ export function TopBar() {
         </span>
       )}
 
-      <div className="h-6 border-l border-lab-700/60 mx-1" />
+      <div className="h-6 border-l border-lab-750 mx-1" />
 
       {!running ? (
-        <button className="btn-ok !py-1.5 !px-4 text-xs font-bold" onClick={() => { void s.startTraining(); s.setTab('training') }}
+        <button className="btn-train !py-1.5 !px-4 text-xs font-bold" onClick={() => { void s.startTraining(); s.setTab('training') }}
           disabled={!s.nodes.length || s.trainingBusy || s.backendOk === false}
           title="Start training the current network on the selected dataset">
           ▶ Train
@@ -138,24 +137,24 @@ export function TopBar() {
 
       <div className="flex-1" />
 
-      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-lg bg-lab-850/80 border border-purple-500/30 hidden md:flex">
+      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-lg bg-lab-850 border border-lab-700 hidden md:flex">
         <button
           onClick={s.toggleSidebar}
-          className={`px-2 py-0.5 rounded text-xs transition-colors ${s.sidebarOpen ? 'bg-pink-500/20 text-pink-300 font-semibold' : 'text-purple-300/60 hover:text-purple-200'}`}
+          className={`px-2 py-0.5 rounded text-xs transition-colors ${s.sidebarOpen ? 'bg-zinc-700 text-white font-medium' : 'text-zinc-400 hover:text-zinc-200'}`}
           title="Toggle Left Palette & Data Sidebar"
         >
           ◧ Palette
         </button>
         <button
           onClick={s.toggleInspector}
-          className={`px-2 py-0.5 rounded text-xs transition-colors ${s.inspectorOpen ? 'bg-purple-500/20 text-purple-300 font-semibold' : 'text-purple-300/60 hover:text-purple-200'}`}
+          className={`px-2 py-0.5 rounded text-xs transition-colors ${s.inspectorOpen ? 'bg-zinc-700 text-white font-medium' : 'text-zinc-400 hover:text-zinc-200'}`}
           title="Toggle Right Layer Inspector"
         >
           ◨ Inspector
         </button>
         <button
           onClick={() => s.setBottomPanelSize(s.bottomPanelSize === 'collapsed' ? 'normal' : 'collapsed')}
-          className={`px-2 py-0.5 rounded text-xs transition-colors ${s.bottomPanelSize !== 'collapsed' ? 'bg-pink-500/20 text-pink-300 font-semibold' : 'text-purple-300/60 hover:text-purple-200'}`}
+          className={`px-2 py-0.5 rounded text-xs transition-colors ${s.bottomPanelSize !== 'collapsed' ? 'bg-zinc-700 text-white font-medium' : 'text-zinc-400 hover:text-zinc-200'}`}
           title="Toggle Bottom Analysis Panel"
         >
           ◫ Panels
